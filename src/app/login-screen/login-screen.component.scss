@@ -20,9 +20,26 @@
 
     .title {
       border-bottom: 1px solid #c0c0c0;
-      font-weight: bold;
       padding-bottom: .2em;
       color: $main-text-color;
+      font-size: 1.5em;
+    }
+
+    .content {
+      padding-top: 1em;
+      padding-bottom: 1em;
+
+      .login-info {
+        color: $light-grey;
+      }
+
+      .input-group {
+        padding: .5em;
+
+        .login-btn {
+          width: 100%;
+        }
+      }
     }
   }
 }
