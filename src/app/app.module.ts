@@ -9,12 +9,16 @@ import { HomeComponent } from './home/home.component';
 
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CardComponent } from './shared/card/card.component';
+import { ContentComponent } from './shared/content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
-    HomeComponent
+    HomeComponent,
+    CardComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
