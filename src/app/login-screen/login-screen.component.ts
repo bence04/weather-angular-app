@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginScreenComponent implements OnInit {
 
+  user = {
+    name: '',
+    password: ''
+  };
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  loginBtnClick() {
+    console.log(this.user);
   }
 
 }
