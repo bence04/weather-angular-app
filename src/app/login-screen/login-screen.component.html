@@ -4,6 +4,12 @@
       Bejelentkezés
     </div>
     <div class="content">
+      <p *ngIf="loginError">
+        <ngb-alert type="danger" [dismissible]="false"><strong>Hiba :(</strong> Hibás felhasználónév vagy jelszó!</ngb-alert>
+      </p>
+      <p *ngIf="inputError">
+        <ngb-alert type="warning" [dismissible]="false"><strong>Hiba :(</strong> Minden menző kitöltése kötelező!</ngb-alert>
+      </p>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">
