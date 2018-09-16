@@ -1,6 +1,9 @@
 <div class="wrapper">
   <div class="left-column">
-    <app-card *ngFor="let city of cities" [cities]="city"></app-card>
+    <app-card [(cities)]="cities"></app-card>
+    <div class="add-city">
+      + Új város hozzáadása
+    </div>
   </div>
   <div class="right-column">
     right
