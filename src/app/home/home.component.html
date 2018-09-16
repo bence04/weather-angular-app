@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="left-column">
-    left
+    <app-card *ngFor="let city of cities" [cities]="city"></app-card>
   </div>
   <div class="right-column">
     right

@@ -7,9 +7,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  @Input() cities: any[];
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.cities);
   }
 
 }
