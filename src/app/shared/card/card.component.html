@@ -1,5 +1,7 @@
 <div class="card-wrapper" *ngFor="let city of cities" >
-  <span class="delete" (click)="removeCity(city.cityName)"><i class="far fa-times-circle"></i></span>
+  <span class="delete" (click)="removeCity(city.cityName)">
+    <i class="far fa-times-circle"></i>
+  </span>
   <div class="card-content">
       <span class="city-name">{{ city.cityName }}</span>
       <div class="temp-wrapper">
