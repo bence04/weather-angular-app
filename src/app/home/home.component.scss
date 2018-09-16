@@ -1,9 +1,23 @@
+@import '../../styles.scss';
+
 .wrapper {
   .left-column {
     width: 20%;
     float: left;
     border-right: 1px solid #D0D0D0;
     min-height: 100vh;
+
+    .add-city {
+      padding: 1em;
+      border-bottom: 1px solid #C0C0C0;
+      cursor: pointer;
+
+
+      .text {
+        color: $main-text-color;
+        margin-bottom: 0;
+      }
+    }
   }
 
   .right-column {
