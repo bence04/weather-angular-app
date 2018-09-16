@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  newCity = '';
+  closeResult: string;
   cities = [{
       userID: 1,
       cityName: 'Gödöllő'
@@ -17,13 +20,26 @@ export class HomeComponent implements OnInit {
       userID: 1,
       cityName: 'Vác'
     }];
-  constructor() { }
+
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
-  addNewCity() {
+  addNewCity(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      if (this.newCity !== '') {
+        const resNewCity = {
+          userID: +localStorage.getItem('userID'),
+          cityName: this.newCity
+        };
 
+        this.cities.push(resNewCity);
+        this.newCity = '';
+      }
+    });
   }
+
+
 
 }

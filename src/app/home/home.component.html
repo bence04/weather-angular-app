@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="left-column">
     <app-card [(cities)]="cities"></app-card>
-    <div class="add-city" (click)="addNewCity()">
+    <div class="add-city" (click)="addNewCity(content)">
       <p class="text"><i class="fas fa-plus-circle"></i> Új város hozzáadása</p>
     </div>
   </div>
@@ -9,3 +9,29 @@
     right
   </div>
 </div>
+
+
+
+<!-- Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Új város hozzáadása</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="dateOfBirth">Város neve</label>
+          <div class="input-group">
+            <input type="text" placeholder="Város" class="form-control" [(ngModel)]="newCity" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+    </div>
+  </ng-template>
+
