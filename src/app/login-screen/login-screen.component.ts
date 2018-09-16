@@ -42,6 +42,7 @@ export class LoginScreenComponent implements OnInit {
           founded = true;
           if (this.users[key].password === this.user.password) {
             localStorage.setItem('logged', '1');
+            localStorage.setItem('userID', this.users[key].id);
             this.router.navigate(['home']);
           } else {
             this.loginError = true;
