@@ -1,0 +1,28 @@
+@import '../../../styles.scss';
+
+.card-wrapper {
+  margin: 0;
+  padding: 1em 2em;
+  border-bottom: 1px solid #C0C0C0;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+
+  .city-name {
+    color: $main-text-color;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .temp-wrapper {
+
+    .weather-icon {
+      width: 35px;
+    }
+
+    .temp {
+      font-size: 14px;
+    }
+  }
+}

@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  cities = [{
+      userID: 1,
+      cityName: 'Gödöllő'
+    }, {
+      userID: 1,
+      cityName: 'Budapest'
+    }, {
+      userID: 1,
+      cityName: 'Vác'
+    }];
   constructor() { }
 
   ngOnInit() {
