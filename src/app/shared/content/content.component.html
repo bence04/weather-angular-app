@@ -1,3 +1,6 @@
-<p>
-  content works!
+<p *ngIf="actualCity !== undefined">
+    {{ actualCity.cityName }}
+</p>
+<p *ngIf="actualCity === undefined">
+    Először adj hozzá egy új várost!
 </p>

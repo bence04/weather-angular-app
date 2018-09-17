@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
       if (this.newCity !== '') {
         this.dbService.addCityByUserID(this.dbService.getUserID(), this.newCity);
         this.cities = this.dbService.getCitiesByUserID(this.dbService.getUserID());
+        this.actualCity = this.cities[0];
         this.newCity = '';
       }
     });
