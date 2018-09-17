@@ -1,5 +1,6 @@
 <p *ngIf="actualCity !== undefined">
-    {{ actualCity.cityName }}
+    {{ currentWeather[0].name }}
+    {{ currentWeather[0].main.temp }}
 </p>
 <p *ngIf="actualCity === undefined">
     Először adj hozzá egy új várost!

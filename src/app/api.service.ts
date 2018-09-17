@@ -14,4 +14,8 @@ export class ApiService {
     return this.http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + this.appID + '&units=metric');
   }
 
+  getForecast5Weather(cityName): Observable <any> {
+    return this.http.get('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=' + this.appID + '&units=metric');
+  }
+
 }

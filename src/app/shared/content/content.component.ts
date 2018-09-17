@@ -10,11 +10,14 @@ import { ApiService } from '../../api.service';
 export class ContentComponent implements OnChanges {
 
   @Input() actualCity: any[];
-  constructor() { }
+  currentWeather: any[] = [];
+  constructor(private apiService: ApiService) { }
 
   ngOnChanges() {
-    console.log('CONTENT');
-    console.log(this.actualCity);
+    this.currentWeather = [];
+    this.apiService.getCurrentWeather(this.actualCity.cityName).subscribe(data => {
+      this.currentWeather.push(data);
+    });
   }
 
 }
