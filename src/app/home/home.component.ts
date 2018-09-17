@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { DbService } from '../db.service';
 
 @Component({
   selector: 'app-home',
@@ -10,31 +11,19 @@ export class HomeComponent implements OnInit {
 
   newCity = '';
   closeResult: string;
-  cities = [{
-      userID: 1,
-      cityName: 'Gödöllő'
-    }, {
-      userID: 1,
-      cityName: 'Budapest'
-    }, {
-      userID: 1,
-      cityName: 'Vác'
-    }];
+  cities: any[];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private dbService: DbService) { }
 
   ngOnInit() {
+    this.cities = this.dbService.getCitiesByUserID(this.dbService.getUserID());
   }
 
   addNewCity(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (this.newCity !== '') {
-        const resNewCity = {
-          userID: +localStorage.getItem('userID'),
-          cityName: this.newCity
-        };
-
-        this.cities.push(resNewCity);
+        this.dbService.addCityByUserID(this.dbService.getUserID(), this.newCity);
+        this.cities = this.dbService.getCitiesByUserID(this.dbService.getUserID());
         this.newCity = '';
       }
     });

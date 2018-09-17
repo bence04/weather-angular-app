@@ -26,4 +26,38 @@ export class DbService {
     localStorage.setItem('users', JSON.stringify(users));
   }
 
+  getUserID() {
+    return +localStorage.getItem('userID');
+  }
+
+  getCitiesByUserID(userID) {
+    const cities: any[] = JSON.parse(localStorage.getItem('cities'));
+    const returnCities: any[] = [];
+    cities.forEach(element => {
+      if (element.userID === userID) {
+        returnCities.push(element);
+      }
+    });
+
+    return returnCities;
+  }
+
+  addCityByUserID(userID, cityName) {
+    let cities: any[] = JSON.parse(localStorage.getItem('cities'));
+
+    if (cities == null) {
+      cities = [{
+        userID: userID,
+        cityName: cityName
+      }];
+    } else {
+      const newCity = {
+        userID: userID,
+        cityName: cityName
+      };
+      cities.push(newCity);
+    }
+    localStorage.setItem('cities', JSON.stringify(cities));
+  }
+
 }
