@@ -1,15 +1,14 @@
 <div class="wrapper">
   <div class="left-column">
-    <app-card [(cities)]="cities"></app-card>
+    <app-card [(cities)]="cities" [(actualCity)]="actualCity"></app-card>
     <div class="add-city" (click)="addNewCity(content)">
       <p class="text"><i class="fas fa-plus-circle"></i> Új város hozzáadása</p>
     </div>
   </div>
   <div class="right-column">
-    right
+    <app-content [(actualCity)]="actualCity"></app-content>
   </div>
 </div>
-
 
 
 <!-- Modal -->

@@ -39,6 +39,12 @@ export class DbService {
       }
     });
 
+    returnCities.sort(function(a, b) {
+      const textA = a.cityName.toUpperCase();
+      const textB = b.cityName.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
     return returnCities;
   }
 

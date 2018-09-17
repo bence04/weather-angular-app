@@ -12,11 +12,15 @@ export class HomeComponent implements OnInit {
   newCity = '';
   closeResult: string;
   cities: any[];
+  actualCity = [];
 
   constructor(private modalService: NgbModal, private dbService: DbService) { }
 
   ngOnInit() {
     this.cities = this.dbService.getCitiesByUserID(this.dbService.getUserID());
+    if (this.cities[0] !== null) {
+      this.actualCity = this.cities[0];
+    }
   }
 
   addNewCity(content) {

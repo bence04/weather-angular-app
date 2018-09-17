@@ -10,7 +10,9 @@ import { ApiService } from '../../api.service';
 export class CardComponent implements OnChanges {
 
   @Input() cities: any[];
+  @Input() actualCity: any[];
   @Output() citiesChange = new EventEmitter();
+  @Output() actualCityChange = new EventEmitter();
   currentWeather: any[] = [];
 
   constructor(private dbService: DbService, private apiService: ApiService) { }
@@ -22,11 +24,20 @@ export class CardComponent implements OnChanges {
         this.currentWeather.push(data);
       });
     });
+
   }
 
   removeCity(cityName) {
     this.dbService.removeCityByUserID(this.dbService.getUserID(), cityName);
     this.citiesChange.emit(this.dbService.getCitiesByUserID(this.dbService.getUserID()));
+  }
+
+  setActual(cityName) {
+    const newActual = {
+      userID: this.dbService.getUserID(),
+      cityName: cityName
+    };
+    this.actualCityChange.emit(newActual);
   }
 
 }
