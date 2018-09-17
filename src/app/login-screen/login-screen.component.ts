@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DbService } from '../db.service';
 
 @Component({
   selector: 'app-login-screen',
@@ -16,13 +17,15 @@ export class LoginScreenComponent implements OnInit {
   loginError = false;
   inputError = false;
 
-  constructor(public router: Router) {
-    if (localStorage.getItem('users')) {
-      this.users = JSON.parse(localStorage.getItem('users'));
-    }
+  constructor(public router: Router, public dbService: DbService) {
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.dbService.getUsers()) {
+      this.users = this.dbService.getUsers();
+    }
+  }
 
   checkInputs() {
     if (this.user.name === '' || this.user.password === '') {
@@ -37,12 +40,11 @@ export class LoginScreenComponent implements OnInit {
   loginBtnClick() {
     if (this.checkInputs()) {
       let founded = false;
-      Object.keys(this.users).forEach(key => {
-        if (this.users[key].name === this.user.name) {
+      this.users.forEach(element => {
+        if (element.name === this.user.name) {
           founded = true;
-          if (this.users[key].password === this.user.password) {
-            localStorage.setItem('logged', '1');
-            localStorage.setItem('userID', this.users[key].id);
+          if (element.password === this.user.password) {
+            this.dbService.setLoggedUserID(element.id);
             this.router.navigate(['home']);
           } else {
             this.loginError = true;
@@ -52,9 +54,8 @@ export class LoginScreenComponent implements OnInit {
 
       if (!founded) {
         this.user.id = this.users.length;
-        this.users.push(this.user);
-        localStorage.setItem('users', JSON.stringify(this.users));
-        localStorage.setItem('logged', '1');
+        this.dbService.addNewUser(this.user);
+        this.dbService.setLoggedUserID(this.user.id);
         this.router.navigate(['home']);
       }
     }
