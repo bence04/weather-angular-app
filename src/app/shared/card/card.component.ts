@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DbService } from '../../db.service';
 
 @Component({
   selector: 'app-card',
@@ -10,20 +11,15 @@ export class CardComponent implements OnInit {
   @Input() cities: any[];
   @Output() citiesChange = new EventEmitter();
 
-  constructor() { }
+  constructor(private dbService: DbService) { }
 
   ngOnInit() {
     console.log(this.cities);
   }
 
   removeCity(cityName) {
-    const newCities = [];
-    Object.keys(this.cities).forEach(key => {
-      if (this.cities[key].cityName !== cityName) {
-        newCities.push(this.cities[key]);
-      }
-    });
-    this.citiesChange.emit(newCities);
+    this.dbService.removeCityByUserID(this.dbService.getUserID(), cityName);
+    this.citiesChange.emit(this.dbService.getCitiesByUserID(this.dbService.getUserID()));
   }
 
 }

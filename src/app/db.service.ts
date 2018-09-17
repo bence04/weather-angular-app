@@ -60,4 +60,15 @@ export class DbService {
     localStorage.setItem('cities', JSON.stringify(cities));
   }
 
+  removeCityByUserID(userID, cityName) {
+    const cities: any[] = JSON.parse(localStorage.getItem('cities'));
+    const newCities: any[] = [];
+    cities.forEach(element => {
+      if (element.userID !== userID || element.cityName !== cityName) {
+        newCities.push(element);
+      }
+    });
+    localStorage.setItem('cities', JSON.stringify(newCities));
+  }
+
 }
