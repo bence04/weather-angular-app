@@ -1,13 +1,12 @@
-<div class="card-wrapper" *ngFor="let city of cities" >
-  <span class="delete" (click)="removeCity(city.cityName)">
+<div class="card-wrapper" *ngFor="let city of currentWeather" >
+  <span class="delete" (click)="removeCity(city.name)">
     <i class="far fa-times-circle"></i>
   </span>
   <div class="card-content">
-      <span class="city-name">{{ city.cityName }}</span>
+      <span class="city-name">{{ city.name }}</span>
       <div class="temp-wrapper">
-          <img src="http://openweathermap.org/img/w100/01n.png" class="weather-icon">
-          <span class="temp">18°C</span>
+          <img src="http://openweathermap.org/img/w100/{{ city.weather[0].icon }}.png" class="weather-icon">
+          <span class="temp">{{ city.main.temp }}°C</span>
       </div>
   </div>
-
 </div>

@@ -1,20 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { DbService } from '../../db.service';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnChanges {
 
   @Input() cities: any[];
   @Output() citiesChange = new EventEmitter();
+  currentWeather: any[] = [];
 
-  constructor(private dbService: DbService) { }
+  constructor(private dbService: DbService, private apiService: ApiService) { }
 
-  ngOnInit() {
-    console.log(this.cities);
+  ngOnChanges() {
+    this.currentWeather = [];
+    this.cities.forEach(element => {
+      this.apiService.getCurrentWeather(element.cityName).subscribe(data => {
+        this.currentWeather.push(data);
+      });
+    });
   }
 
   removeCity(cityName) {
