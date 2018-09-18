@@ -1,14 +1,16 @@
-<div class="card-wrapper" *ngFor="let city of currentWeather" >
-  <div [ngClass]="{'actual' : actualCity.cityName == city.name}" (click)="setActual(city.name)">
-      <span class="delete" (click)="removeCity(city.name)">
-          <i class="far fa-times-circle"></i>
-        </span>
-        <div class="card-content">
-            <span class="city-name">{{ city.name }}</span>
-            <div class="temp-wrapper">
-                <img src="http://openweathermap.org/img/w100/{{ city.weather[0].icon }}.png" class="weather-icon">
-                <span class="temp">{{ city.main.temp }}°C</span>
+<div class="card-wrapper" *ngFor="let key of objectKeys" >
+  <div *ngIf="dictionary[key].length !== 0">
+      <div [ngClass]="{'actual' : actualCity.cityName == dictionary[key].name}" (click)="setActual(dictionary[key].name)">
+          <span class="delete" (click)="removeCity(dictionary[key].name)">
+              <i class="far fa-times-circle"></i>
+            </span>
+            <div class="card-content">
+                <span class="city-name">{{ dictionary[key].name }}</span>
+                <div class="temp-wrapper">
+                    <img src="http://openweathermap.org/img/w100/{{ dictionary[key].weather[0].icon }}.png" class="weather-icon">
+                    <span class="temp">{{ dictionary[key].main.temp }}°C</span>
+                </div>
             </div>
-        </div>
+      </div>
   </div>
 </div>

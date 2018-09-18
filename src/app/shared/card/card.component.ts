@@ -14,16 +14,36 @@ export class CardComponent implements OnChanges {
   @Output() citiesChange = new EventEmitter();
   @Output() actualCityChange = new EventEmitter();
   currentWeather: any[] = [];
+  objectKeys: any[] = [];
+  dictionary = {};
 
   constructor(private dbService: DbService, private apiService: ApiService) { }
 
   ngOnChanges() {
     this.currentWeather = [];
-    this.cities.forEach(element => {
-      this.apiService.getCurrentWeather(element.cityName).subscribe(data => {
-        this.currentWeather.push(data);
-      });
+    this.dictionary = {};
+    const requests = this.cities.map((item) => {
+        return new Promise((resolve) => {
+          this.asyncFunction(item, resolve);
+        });
     });
+
+    Promise.all(requests).then(() => {
+      this.objectKeys = Object.keys(this.dictionary);
+      Object.entries(this.dictionary).forEach(([key]) => {
+        this.apiService.getCurrentWeather(key).subscribe(data => {
+          this.dictionary[key] = data;
+          console.log(this.dictionary);
+        });
+      });
+
+    });
+
+  }
+
+  asyncFunction(item, resolve) {
+    this.dictionary[item.cityName] = [];
+    resolve();
   }
 
   removeCity(cityName) {
