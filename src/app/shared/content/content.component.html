@@ -1,7 +1,32 @@
-<p *ngIf="actualCity !== undefined">
-    {{ currentWeather[0].name }}
-    {{ currentWeather[0].main.temp }}
-</p>
-<p *ngIf="actualCity === undefined">
+<div class="info" *ngIf="currentWeather[0] !== undefined">
+
+    <h2 class="title">Aktuális időjárás</h2>
+    <hr>
+
+    <div class="actual-content">
+        <p>Aktuális hőmérséklet: {{ currentWeather[0].main.temp }}°C</p>
+        <p>Aktuális páratartalom: {{ currentWeather[0].main.humidity }}%</p>
+        <p>Aktuális légnyomás: {{ currentWeather[0].main.pressure }}hPa</p>
+    </div>
+
+
+    <h2 class="title">5 napos előrejelzés</h2>
+    <hr>
+    <ngx-charts-line-chart *ngIf="this.multi[0].series[0] != undefined"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="multi"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [autoScale]="autoScale"
+      (select)="onSelect($event)">
+    </ngx-charts-line-chart>
+  </div>
+<p *ngIf="currentWeather[0] === undefined">
     Először adj hozzá egy új várost!
 </p>

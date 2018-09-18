@@ -11,12 +11,54 @@ export class ContentComponent implements OnChanges {
 
   @Input() actualCity: any[];
   currentWeather: any[] = [];
+  windDirection = '';
+  windSpeed = '';
+
+  multi: any[] = [{
+    name: 'Temp',
+    series: []
+  }];
+
+  view: any[] = [1200, 400];
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Időpont';
+  showYAxisLabel = true;
+  yAxisLabel = 'Hőmérséklet';
+  timeline = true;
+
+  colorScheme = {
+    domain: ['#627e75']
+  };
+
+  // line, area
+  autoScale = true;
+
   constructor(private apiService: ApiService) { }
 
   ngOnChanges() {
+    this.multi = [{
+      name: 'Temp',
+      series: []
+    }];
     this.currentWeather = [];
     this.apiService.getCurrentWeather(this.actualCity.cityName).subscribe(data => {
       this.currentWeather.push(data);
+    });
+    this.apiService.getForecast5Weather(this.actualCity.cityName).subscribe(data => {
+      data.list.forEach(element => {
+        const newSeriesMin = {
+          name: element.dt_txt.substring(0, element.dt_txt.length - 3),
+          value: element.main.temp_min
+        };
+
+        this.multi[0].series.push(newSeriesMin);
+      });
     });
   }
 
