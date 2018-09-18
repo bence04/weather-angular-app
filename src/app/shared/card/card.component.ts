@@ -33,7 +33,6 @@ export class CardComponent implements OnChanges {
       Object.entries(this.dictionary).forEach(([key]) => {
         this.apiService.getCurrentWeather(key).subscribe(data => {
           this.dictionary[key] = data;
-          console.log(this.dictionary);
         });
       });
 
