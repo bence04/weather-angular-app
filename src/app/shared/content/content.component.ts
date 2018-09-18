@@ -1,5 +1,4 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { DbService } from '../../db.service';
 import { ApiService } from '../../api.service';
 
 @Component({
@@ -9,10 +8,8 @@ import { ApiService } from '../../api.service';
 })
 export class ContentComponent implements OnChanges {
 
-  @Input() actualCity: any[];
+  @Input() actualCity: any[] = [];
   currentWeather: any[] = [];
-  windDirection = '';
-  windSpeed = '';
 
   multi: any[] = [{
     name: 'Temp',
@@ -35,8 +32,6 @@ export class ContentComponent implements OnChanges {
   colorScheme = {
     domain: ['#627e75']
   };
-
-  // line, area
   autoScale = true;
 
   constructor(private apiService: ApiService) { }

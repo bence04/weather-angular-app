@@ -24,7 +24,6 @@ export class CardComponent implements OnChanges {
         this.currentWeather.push(data);
       });
     });
-
   }
 
   removeCity(cityName) {
@@ -39,5 +38,4 @@ export class CardComponent implements OnChanges {
     };
     this.actualCityChange.emit(newActual);
   }
-
 }
