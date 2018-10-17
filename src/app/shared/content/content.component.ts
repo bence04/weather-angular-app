@@ -8,7 +8,7 @@ import { ApiService } from '../../api.service';
 })
 export class ContentComponent implements OnChanges {
 
-  @Input() actualCity: any[] = [];
+  @Input() actualCity;
   currentWeather: any[] = [];
 
   multi: any[] = [{
@@ -37,7 +37,7 @@ export class ContentComponent implements OnChanges {
   constructor(private apiService: ApiService) { }
 
   ngOnChanges() {
-    this.multi = [{
+    /*this.multi = [{
       name: 'Temp',
       series: []
     }];
@@ -54,7 +54,7 @@ export class ContentComponent implements OnChanges {
 
         this.multi[0].series.push(newSeriesMin);
       });
-    });
+    });*/
   }
 
 }

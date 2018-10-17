@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "weather-angular-app"
+  "defaultProject": "weather-angular-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

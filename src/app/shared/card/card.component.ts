@@ -1,6 +1,11 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { DbService } from '../../db.service';
 import { ApiService } from '../../api.service';
+import { City } from '../../cities/models/city';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import { DeleteCity, SetActualCity } from '../../actions/city.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -9,7 +14,7 @@ import { ApiService } from '../../api.service';
 })
 export class CardComponent implements OnChanges {
 
-  @Input() cities: any[];
+  cities: Observable<City[]>;
   @Input() actualCity: any[];
   @Output() citiesChange = new EventEmitter();
   @Output() actualCityChange = new EventEmitter();
@@ -17,10 +22,13 @@ export class CardComponent implements OnChanges {
   objectKeys: any[] = [];
   dictionary = {};
 
-  constructor(private dbService: DbService, private apiService: ApiService) { }
+  constructor(private store: Store<AppState>, private dbService: DbService, private apiService: ApiService) {
+    this.cities = this.store.select('city');
+    console.log(this.cities);
+  }
 
   ngOnChanges() {
-    this.currentWeather = [];
+    /*this.currentWeather = [];
     this.dictionary = {};
     const requests = this.cities.map((item) => {
         return new Promise((resolve) => {
@@ -36,25 +44,23 @@ export class CardComponent implements OnChanges {
         });
       });
 
-    });
+    });*/
 
   }
 
-  asyncFunction(item, resolve) {
+  /* asyncFunction(item, resolve) {
     this.dictionary[item.cityName] = [];
     resolve();
-  }
+  } */
 
   removeCity(cityName) {
-    this.dbService.removeCityByUserID(this.dbService.getUserID(), cityName);
-    this.citiesChange.emit(this.dbService.getCitiesByUserID(this.dbService.getUserID()));
+    this.store.dispatch(new DeleteCity(cityName));
+    // this.dbService.removeCityByUserID(this.dbService.getUserID(), cityName);
+    // this.citiesChange.emit(this.dbService.getCitiesByUserID(this.dbService.getUserID()));
   }
 
   setActual(cityName) {
-    const newActual = {
-      userID: this.dbService.getUserID(),
-      cityName: cityName
-    };
-    this.actualCityChange.emit(newActual);
+    this.store.dispatch(new SetActualCity(cityName));
+    // this.actualCityChange.emit(newActual);
   }
 }
