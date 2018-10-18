@@ -6,10 +6,10 @@
             </span>
             <div class="card-content">
                 <span class="city-name">{{ city.name }}</span>
-                <!--div class="temp-wrapper">
-                    <img src="http://openweathermap.org/img/w100/{{ city.weather[0].icon }}.png" class="weather-icon">
-                    <span class="temp">{{ city.main.temp }}°C</span>
-                </div-->
+                <div class="temp-wrapper">
+                    <img src="http://openweathermap.org/img/w100/{{ city.weather.weather[0].icon }}.png" class="weather-icon">
+                    <span class="temp">{{ city.weather.main.temp }}°C</span>
+                </div>
             </div>
       </div>
   </div>

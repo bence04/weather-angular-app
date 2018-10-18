@@ -17,7 +17,8 @@ import { ContentComponent } from './shared/content/content.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducer } from './reducers/city.reducer';
+import { WeatherEffects } from './effects/weather.effects';
+import { reducers } from './app.state';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { reducer } from './reducers/city.reducer';
     HttpClientModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({city: reducer}),
+    EffectsModule.forRoot([WeatherEffects]),
+    StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

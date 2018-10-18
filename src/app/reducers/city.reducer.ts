@@ -1,4 +1,4 @@
-import { Actions, CREATE_CITY, DELETE_CITY, SET_ACTUAL_CITY } from '../actions/city.actions';
+import { Actions, SET_ACTUAL_CITY, CREATE_CITY_SUCCESSFUL, DELETE_CITY_SUCCESSFUL } from '../actions/city.actions';
 import { City } from '../cities/models/city';
 
 const initialState: City[] = [];
@@ -8,10 +8,10 @@ export function reducer(
     action: Actions) {
 
     switch (action.type) {
-        case CREATE_CITY:
+        case CREATE_CITY_SUCCESSFUL:
             return [...state, action.payload];
 
-        case DELETE_CITY:
+        case DELETE_CITY_SUCCESSFUL:
             return state.filter(({ name }) => name !== action.name);
 
         case SET_ACTUAL_CITY:
