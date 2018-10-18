@@ -5,7 +5,6 @@ import { City } from '../cities/models/city';
 export const CREATE_CITY_SUCCESSFUL = '[City] Successful city create';
 export const DELETE_CITY_SUCCESSFUL = '[City] Successful city delete';
 export const FAIL_CITY = '[City] Fail city create';
-export const SET_ACTUAL_CITY = '[City] Set Actual';
 
 export class CreateCity implements Action {
     readonly type = CREATE_CITY_SUCCESSFUL;
@@ -25,10 +24,4 @@ export class FailCity implements Action {
     constructor(public error: string) { }
 }
 
-export class SetActualCity implements Action {
-    readonly type = SET_ACTUAL_CITY;
-
-    constructor(public name: string) { }
-}
-
-export type Actions = CreateCity | DeleteCity | FailCity | SetActualCity;
+export type Actions = CreateCity | DeleteCity | FailCity;

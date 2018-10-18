@@ -1,16 +1,14 @@
-<div class="card-wrapper" *ngFor="let city of cities | async" >
-  <div *ngIf="cities.length !== 0">
-      <div [ngClass]="{'actual' : city.active}" (click)="setActual(city.name)">
-          <span class="delete" (click)="removeCity(city.name)">
-              <i class="far fa-times-circle"></i>
-            </span>
-            <div class="card-content">
-                <span class="city-name">{{ city.name }}</span>
-                <div class="temp-wrapper">
-                    <img src="http://openweathermap.org/img/w100/{{ city.weather.weather[0].icon }}.png" class="weather-icon">
-                    <span class="temp">{{ city.weather.main.temp }}°C</span>
-                </div>
+<div class="card-wrapper" *ngFor="let city of cities$ | async">
+    <div [ngClass]="{'actual' : (actualCity$ | async) === city.name }" (click)="setActual(city.name)">
+        <span class="delete" (click)="removeCity(city.name)">
+            <i class="far fa-times-circle"></i>
+        </span>
+        <div class="card-content">
+            <span class="city-name">{{ city.name }}</span>
+            <div class="temp-wrapper">
+                <img src="http://openweathermap.org/img/w100/{{ city.weather.weather[0].icon }}.png" class="weather-icon">
+                <span class="temp">{{ city.weather.main.temp }}°C</span>
             </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

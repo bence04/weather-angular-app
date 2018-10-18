@@ -2,10 +2,12 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
 import { DbService } from '../../db.service';
 import { ApiService } from '../../api.service';
 import { City } from '../../cities/models/city';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { DeleteCity, SetActualCity } from '../../actions/city.actions';
+import { DeleteCity } from '../../actions/city.actions';
 import { Observable } from 'rxjs';
+import { SetActualCity } from 'src/app/actions/actual.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card',
@@ -14,17 +16,15 @@ import { Observable } from 'rxjs';
 })
 export class CardComponent implements OnChanges {
 
-  cities: Observable<City[]>;
-  @Input() actualCity: any[];
-  @Output() citiesChange = new EventEmitter();
-  @Output() actualCityChange = new EventEmitter();
+  cities$: Observable<City[]>;
+  actualCity$: Observable<string>;
   currentWeather: any[] = [];
   objectKeys: any[] = [];
   dictionary = {};
 
   constructor(private store: Store<AppState>, private dbService: DbService, private apiService: ApiService) {
-    this.cities = this.store.select('city');
-    console.log(this.cities);
+    this.cities$ = this.store.select('city');
+    this.actualCity$ = this.store.select('actualCity');
   }
 
   ngOnChanges() {
@@ -61,6 +61,8 @@ export class CardComponent implements OnChanges {
 
   setActual(cityName) {
     this.store.dispatch(new SetActualCity(cityName));
+    console.log(this.actualCity$);
+
     // this.actualCityChange.emit(newActual);
   }
 }

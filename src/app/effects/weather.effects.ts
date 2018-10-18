@@ -25,7 +25,7 @@ export class WeatherEffects {
             console.log('TAP RES');
             console.log(result);
         }),
-        map(res => new CreateCity({name: res.name, userID: '0', active: false, weather: res})),
+        map(res => new CreateCity({name: res.name, userID: '0', weather: res})),
         catchError(error => of(new FailCity(error)))
       )
     )
